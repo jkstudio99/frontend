@@ -1,0 +1,85 @@
+{
+  "medicines": {
+    "title": "รายการยา",
+    "subtitle": "จัดการข้อมูลยาทั้งหมดในระบบ",
+    "actions": {
+      "create": "เพิ่มยา",
+      "edit": "แก้ไข",
+      "delete": "ลบ",
+      "view": "ดูรายละเอียด",
+      "save": "บันทึก",
+      "cancel": "ยกเลิก"
+    },
+    "search": { "placeholder": "ค้นหาชื่อยา, รหัสยา..." },
+    "filter": {
+      "status": "สถานะ",
+      "category": "หมวดหมู่",
+      "all": "ทั้งหมด"
+    },
+    "table": {
+      "code": "รหัสยา",
+      "name": "ชื่อยา",
+      "status": "สถานะ",
+      "dosageForm": "รูปแบบยา",
+      "manufacturer": "ผู้ผลิต",
+      "createdAt": "วันที่เพิ่ม",
+      "actions": "จัดการ"
+    },
+    "form": {
+      "code": "รหัสยา (SKU)",
+      "nameTh": "ชื่อยาภาษาไทย",
+      "nameEn": "ชื่อยาภาษาอังกฤษ",
+      "genericName": "ชื่อสามัญ",
+      "brandName": "ชื่อทางการค้า",
+      "category": "หมวดหมู่",
+      "unit": "หน่วย",
+      "dosageForm": "รูปแบบยา",
+      "strength": "ความแรง",
+      "manufacturer": "ผู้ผลิต",
+      "descriptionTh": "รายละเอียด (ไทย)",
+      "descriptionEn": "รายละเอียด (English)",
+      "imageUrl": "URL รูปภาพ",
+      "status": "สถานะ"
+    },
+    "status": {
+      "active": "ใช้งาน",
+      "inactive": "ปิดใช้งาน",
+      "discontinued": "ยกเลิก"
+    },
+    "dosageForm": {
+      "tablet": "ยาเม็ด",
+      "capsule": "ยาแคปซูล",
+      "syrup": "ยาน้ำเชื่อม",
+      "injection": "ยาฉีด",
+      "cream": "ยาครีม",
+      "other": "อื่นๆ"
+    },
+    "messages": {
+      "createSuccess": "เพิ่มยาสำเร็จ",
+      "updateSuccess": "แก้ไขยาสำเร็จ",
+      "deleteSuccess": "ลบยาสำเร็จ",
+      "codeExists": "รหัสยาซ้ำในระบบ กรุณาตรวจสอบรหัสก่อนบันทึก",
+      "notFound": "ไม่พบข้อมูลยา",
+      "unknownError": "เกิดข้อผิดพลาด กรุณาลองใหม่"
+    },
+    "empty": {
+      "title": "ยังไม่มีข้อมูลยา",
+      "description": "กดปุ่ม 'เพิ่มยา' เพื่อเพิ่มยาตัวแรกในระบบ"
+    },
+    "confirm": {
+      "deleteTitle": "ยืนยันการลบยา?",
+      "deleteDescription": "การลบไม่สามารถย้อนกลับได้ ยา {name} จะถูกลบออกจากระบบ"
+    },
+    "pagination": {
+      "showing": "แสดง {from}–{to} จาก {total} รายการ"
+    }
+  },
+  "common": {
+    "appName": "ระบบจัดการยา",
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาด",
+    "retry": "ลองอีกครั้ง",
+    "back": "ย้อนกลับ",
+    "confirm": "ยืนยัน"
+  }
+}

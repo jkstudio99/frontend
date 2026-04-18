@@ -1,0 +1,85 @@
+{
+  "medicines": {
+    "title": "Medicine List",
+    "subtitle": "Manage all medicines in the system",
+    "actions": {
+      "create": "Add Medicine",
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View Detail",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "search": { "placeholder": "Search by name, code..." },
+    "filter": {
+      "status": "Status",
+      "category": "Category",
+      "all": "All"
+    },
+    "table": {
+      "code": "Code",
+      "name": "Name",
+      "status": "Status",
+      "dosageForm": "Form",
+      "manufacturer": "Manufacturer",
+      "createdAt": "Created",
+      "actions": "Actions"
+    },
+    "form": {
+      "code": "Medicine Code (SKU)",
+      "nameTh": "Thai Name",
+      "nameEn": "English Name",
+      "genericName": "Generic Name",
+      "brandName": "Brand Name",
+      "category": "Category",
+      "unit": "Unit",
+      "dosageForm": "Dosage Form",
+      "strength": "Strength",
+      "manufacturer": "Manufacturer",
+      "descriptionTh": "Description (Thai)",
+      "descriptionEn": "Description (English)",
+      "imageUrl": "Image URL",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "discontinued": "Discontinued"
+    },
+    "dosageForm": {
+      "tablet": "Tablet",
+      "capsule": "Capsule",
+      "syrup": "Syrup",
+      "injection": "Injection",
+      "cream": "Cream",
+      "other": "Other"
+    },
+    "messages": {
+      "createSuccess": "Medicine created successfully",
+      "updateSuccess": "Medicine updated successfully",
+      "deleteSuccess": "Medicine deleted successfully",
+      "codeExists": "Medicine code already exists in the system",
+      "notFound": "Medicine not found",
+      "unknownError": "An error occurred. Please try again."
+    },
+    "empty": {
+      "title": "No medicines yet",
+      "description": "Click 'Add Medicine' to add the first medicine"
+    },
+    "confirm": {
+      "deleteTitle": "Confirm deletion?",
+      "deleteDescription": "This action cannot be undone. Medicine {name} will be permanently deleted."
+    },
+    "pagination": {
+      "showing": "Showing {from}–{to} of {total} items"
+    }
+  },
+  "common": {
+    "appName": "Medicine Management System",
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Try again",
+    "back": "Back",
+    "confirm": "Confirm"
+  }
+}

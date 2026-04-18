@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Primary — orange */
+  --color-primary: #FF6A00;
+  --color-primary-foreground: #ffffff;
+
+  /* Backgrounds */
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+
+  /* Borders */
+  --color-border: var(--border);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+
+  /* Semantic */
+  --color-success: #34C759;
+  --color-error: #FF3B30;
+  --color-warning: #FF9F0A;
+  --color-info: #0A84FF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --bg: #ffffff;
+  --surface: #f9f9f9;
+  --surface-elevated: #ffffff;
+  --border: #e5e5e5;
+  --text-primary: #171717;
+  --text-secondary: #737373;
+  --primary: #FF6A00;
+  --primary-foreground: #ffffff;
+  --error: #FF3B30;
+  --radius: 0.5rem;
+
+  /* Shadcn-compatible tokens */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 9%;
+  --primary-hsl: 24 100% 50%;
+  --primary-foreground-hsl: 0 0% 100%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --input: 0 0% 90%;
+  --ring: 24 100% 50%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --bg: #0a0a0a;
+  --surface: #171717;
+  --surface-elevated: #1f1f1f;
+  --border: #404040;
+  --text-primary: #fafafa;
+  --text-secondary: #a3a3a3;
+  --primary: #FF7A3D;
+  --primary-foreground: #ffffff;
+  --error: #FF453A;
+
+  --background: 0 0% 4%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 7%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 0 0% 98%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 64%;
+  --accent: 0 0% 15%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 63% 31%;
+  --destructive-foreground: 0 0% 98%;
+  --input: 0 0% 20%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans, Arial, sans-serif);
+  -webkit-font-smoothing: antialiased;
 }
+
+* { border-color: var(--border); }
