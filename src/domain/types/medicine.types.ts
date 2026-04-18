@@ -21,22 +21,28 @@ export interface Medicine {
   updatedAt: string;
 }
 
-export interface PaginationMeta {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
+export interface MedicineFilter {
+  page?: number;
+  limit?: number;
+  search?: string;
+  status?: MedicineStatus;
+  categoryId?: string;
 }
 
 export interface PaginatedMedicines {
   data: Medicine[];
-  meta: { pagination: PaginationMeta };
+  meta: { page: number; limit: number; total: number; totalPages: number };
 }
 
-export interface MedicineFilter {
-  search?: string;
-  status?: MedicineStatus;
-  categoryId?: string;
-  page?: number;
-  limit?: number;
+export interface Category {
+  id: string;
+  nameTh: string;
+  nameEn: string;
+}
+
+export interface Unit {
+  id: string;
+  nameTh: string;
+  nameEn: string;
+  abbreviation: string;
 }

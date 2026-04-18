@@ -5,8 +5,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { Input } from '@/presentation/components/ui/input';
 import { Button } from '@/presentation/components/ui/button';
-import { createMedicineSchema, type CreateMedicineInput } from '@/domain/schemas/medicine.schema';
+import { createMedicineSchema } from '@/domain/schemas/medicine.schema';
+import type { CreateMedicineInput } from '@/domain/schemas/medicine.schema';
 import type { Medicine } from '@/domain/types/medicine.types';
+import { useCategories } from '@/application/categories/useCategories';
+import { useUnits } from '@/application/units/useUnits';
 
 interface Props {
   defaultValues?: Partial<Medicine>;
@@ -18,84 +21,103 @@ interface Props {
 const DOSAGE_FORMS = ['tablet', 'capsule', 'syrup', 'injection', 'cream', 'other'] as const;
 const STATUSES = ['active', 'inactive', 'discontinued'] as const;
 
+const selectClass =
+  'flex h-9 w-full rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-1 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)]';
+
 export function MedicineForm({ defaultValues, onSubmit, isPending, mode }: Props) {
   const t = useTranslations('medicines');
+  const { data: categories = [] } = useCategories();
+  const { data: units = [] } = useUnits();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<CreateMedicineInput>({
     resolver: zodResolver(createMedicineSchema),
-    defaultValues: defaultValues
-      ? {
-          code: defaultValues.code,
-          name_th: defaultValues.name_th,
-          name_en: defaultValues.name_en,
-          generic_name: defaultValues.generic_name ?? undefined,
-          brand_name: defaultValues.brand_name ?? undefined,
-          category_id: defaultValues.category_id,
-          unit_id: defaultValues.unit_id,
-          dosage_form: defaultValues.dosage_form,
-          strength: defaultValues.strength ?? undefined,
-          manufacturer: defaultValues.manufacturer ?? undefined,
-          description_th: defaultValues.description_th ?? '',
-          description_en: defaultValues.description_en ?? '',
-          image_url: defaultValues.image_url ?? undefined,
-          status: defaultValues.status ?? 'active',
-        }
-      : { status: 'active' },
+    defaultValues: {
+      code: defaultValues?.code ?? '',
+      nameTh: defaultValues?.nameTh ?? '',
+      nameEn: defaultValues?.nameEn ?? '',
+      genericName: defaultValues?.genericName ?? '',
+      brandName: defaultValues?.brandName ?? '',
+      categoryId: defaultValues?.categoryId ?? '',
+      unitId: defaultValues?.unitId ?? '',
+      dosageForm: defaultValues?.dosageForm ?? 'tablet',
+      strength: defaultValues?.strength ?? '',
+      manufacturer: defaultValues?.manufacturer ?? '',
+      descriptionTh: defaultValues?.descriptionTh ?? '',
+      descriptionEn: defaultValues?.descriptionEn ?? '',
+      imageUrl: defaultValues?.imageUrl ?? undefined,
+      status: defaultValues?.status ?? 'active',
+    },
   });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5 sm:grid-cols-2">
-      {/* Code */}
+      {/* code */}
       <div className="col-span-full flex flex-col gap-1.5">
         <label className="text-sm font-medium">{t('form.code')}</label>
-        <Input {...register('code')} placeholder="e.g. MED-001" disabled={mode === 'edit'} />
+        <Input {...register('code')} placeholder="MED-001" disabled={mode === 'edit'} />
         {errors.code && <p className="text-xs text-[var(--error)]">{errors.code.message}</p>}
       </div>
 
-      {/* name_th / name_en */}
+      {/* nameTh / nameEn */}
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium">{t('form.nameTh')}</label>
-        <Input {...register('name_th')} />
-        {errors.name_th && <p className="text-xs text-[var(--error)]">{errors.name_th.message}</p>}
+        <Input {...register('nameTh')} />
+        {errors.nameTh && <p className="text-xs text-[var(--error)]">{errors.nameTh.message}</p>}
       </div>
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium">{t('form.nameEn')}</label>
-        <Input {...register('name_en')} />
-        {errors.name_en && <p className="text-xs text-[var(--error)]">{errors.name_en.message}</p>}
+        <Input {...register('nameEn')} />
+        {errors.nameEn && <p className="text-xs text-[var(--error)]">{errors.nameEn.message}</p>}
       </div>
 
-      {/* generic_name / brand_name */}
+      {/* genericName / brandName */}
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium">{t('form.genericName')}</label>
-        <Input {...register('generic_name')} />
+        <Input {...register('genericName')} />
       </div>
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium">{t('form.brandName')}</label>
-        <Input {...register('brand_name')} />
+        <Input {...register('brandName')} />
       </div>
 
-      {/* dosage_form */}
+      {/* categoryId / unitId */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium">{t('form.category')}</label>
+        <select {...register('categoryId')} className={selectClass}>
+          <option value="">— เลือกหมวดหมู่ —</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>{c.nameTh}</option>
+          ))}
+        </select>
+        {errors.categoryId && <p className="text-xs text-[var(--error)]">{errors.categoryId.message}</p>}
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium">{t('form.unit')}</label>
+        <select {...register('unitId')} className={selectClass}>
+          <option value="">— เลือกหน่วย —</option>
+          {units.map((u) => (
+            <option key={u.id} value={u.id}>{u.nameTh}</option>
+          ))}
+        </select>
+        {errors.unitId && <p className="text-xs text-[var(--error)]">{errors.unitId.message}</p>}
+      </div>
+
+      {/* dosageForm / strength */}
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium">{t('form.dosageForm')}</label>
-        <select
-          {...register('dosage_form')}
-          className="flex h-9 w-full rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-1 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)]"
-        >
-          <option value="">—</option>
+        <select {...register('dosageForm')} className={selectClass}>
           {DOSAGE_FORMS.map((f) => (
             <option key={f} value={f}>{t(`dosageForm.${f}`)}</option>
           ))}
         </select>
-        {errors.dosage_form && <p className="text-xs text-[var(--error)]">{errors.dosage_form.message}</p>}
       </div>
-
-      {/* strength */}
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium">{t('form.strength')}</label>
-        <Input {...register('strength')} placeholder="e.g. 500mg" />
+        <Input {...register('strength')} placeholder="500mg" />
       </div>
 
       {/* manufacturer */}
@@ -104,32 +126,37 @@ export function MedicineForm({ defaultValues, onSubmit, isPending, mode }: Props
         <Input {...register('manufacturer')} />
       </div>
 
-      {/* status (edit only) */}
-      {mode === 'edit' && (
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-medium">{t('form.status')}</label>
-          <select
-            {...register('status')}
-            className="flex h-9 w-full rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-1 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)]"
-          >
-            {STATUSES.map((s) => (
-              <option key={s} value={s}>{t(`status.${s}`)}</option>
-            ))}
-          </select>
-        </div>
-      )}
+      {/* descriptionTh / descriptionEn */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium">{t('form.descriptionTh')}</label>
+        <textarea {...register('descriptionTh')} rows={3} className={`${selectClass} h-auto py-2`} />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium">{t('form.descriptionEn')}</label>
+        <textarea {...register('descriptionEn')} rows={3} className={`${selectClass} h-auto py-2`} />
+      </div>
 
-      {/* image_url */}
-      <div className="col-span-full flex flex-col gap-1.5">
+      {/* status */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-sm font-medium">{t('form.status')}</label>
+        <select {...register('status')} className={selectClass}>
+          {STATUSES.map((s) => (
+            <option key={s} value={s}>{t(`status.${s}`)}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* imageUrl */}
+      <div className="flex flex-col gap-1.5">
         <label className="text-sm font-medium">{t('form.imageUrl')}</label>
-        <Input {...register('image_url')} type="url" placeholder="https://..." />
-        {errors.image_url && <p className="text-xs text-[var(--error)]">{errors.image_url.message}</p>}
+        <Input {...register('imageUrl')} type="url" placeholder="https://..." />
+        {errors.imageUrl && <p className="text-xs text-[var(--error)]">{errors.imageUrl.message}</p>}
       </div>
 
       {/* submit */}
       <div className="col-span-full flex justify-end gap-3 pt-2">
         <Button type="submit" disabled={isPending}>
-          {isPending ? t('common.loading', { ns: 'common' }) : t('actions.save')}
+          {isPending ? '...' : t('actions.save')}
         </Button>
       </div>
     </form>

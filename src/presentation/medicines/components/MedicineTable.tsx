@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { Pencil, Trash2, Eye } from 'lucide-react';
+import { Pencil, Eye } from 'lucide-react';
 import { Button } from '@/presentation/components/ui/button';
 import { Skeleton } from '@/presentation/components/ui/skeleton';
 import { MedicineStatusBadge } from './MedicineStatusBadge';
@@ -58,14 +58,14 @@ export function MedicineTable({ medicines, isLoading, locale }: Props) {
             <tr key={med.id} className="bg-[var(--bg)] hover:bg-[var(--surface)] transition-colors">
               <td className="px-4 py-3 font-mono text-xs font-medium">{med.code}</td>
               <td className="px-4 py-3">
-                <p className="font-medium text-[var(--text-primary)]">{med.name_th}</p>
-                <p className="text-xs text-[var(--text-secondary)]">{med.name_en}</p>
+                <p className="font-medium text-[var(--text-primary)]">{med.nameTh}</p>
+                <p className="text-xs text-[var(--text-secondary)]">{med.nameEn}</p>
               </td>
               <td className="px-4 py-3">
                 <MedicineStatusBadge status={med.status} />
               </td>
               <td className="px-4 py-3 text-[var(--text-secondary)]">
-                {t(`dosageForm.${med.dosage_form}`)}
+                {t(`dosageForm.${med.dosageForm}`)}
               </td>
               <td className="px-4 py-3 text-[var(--text-secondary)]">{med.manufacturer ?? '—'}</td>
               <td className="px-4 py-3">

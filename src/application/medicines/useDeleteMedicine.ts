@@ -11,10 +11,9 @@ export function useDeleteMedicine() {
     mutationFn: (id: string) => medicinesApi.remove(id),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: medicineKeys.lists() });
-      toast.success('ลบยาสำเร็จ');
     },
-    onError: (err: AxiosError<{ message: string }>) => {
-      toast.error(err.response?.data?.message ?? 'เกิดข้อผิดพลาด กรุณาลองใหม่');
+    onError: (_err: AxiosError<{ message: string }>) => {
+      // caller handles toast via mutate() options
     },
   });
 }

@@ -12,10 +12,9 @@ export function useCreateMedicine() {
     mutationFn: (body: CreateMedicineInput) => medicinesApi.create(body),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: medicineKeys.lists() });
-      toast.success('เพิ่มยาสำเร็จ');
     },
-    onError: (err: AxiosError<{ message: string }>) => {
-      toast.error(err.response?.data?.message ?? 'เกิดข้อผิดพลาด กรุณาลองใหม่');
+    onError: (_err: AxiosError<{ message: string }>) => {
+      // caller handles toast via mutate() options
     },
   });
 }

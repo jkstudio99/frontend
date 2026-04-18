@@ -40,7 +40,7 @@ export function DeleteMedicineDialog({ medicine }: { medicine: Medicine }) {
         <AlertDialogHeader>
           <AlertDialogTitle>{t('confirm.deleteTitle')}</AlertDialogTitle>
           <AlertDialogDescription>
-            {t('confirm.deleteDescription', { name: medicine.name_th })}
+            {t('confirm.deleteDescription', { name: medicine.nameTh })}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

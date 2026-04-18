@@ -72,6 +72,9 @@
     },
     "pagination": {
       "showing": "แสดง {from}–{to} จาก {total} รายการ"
+    },
+    "common": {
+      "back": "ย้อนกลับ"
     }
   },
   "common": {

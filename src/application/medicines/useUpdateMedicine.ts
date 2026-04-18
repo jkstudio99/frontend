@@ -13,10 +13,9 @@ export function useUpdateMedicine(id: string) {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: medicineKeys.lists() });
       qc.invalidateQueries({ queryKey: medicineKeys.detail(id) });
-      toast.success('แก้ไขยาสำเร็จ');
     },
-    onError: (err: AxiosError<{ message: string }>) => {
-      toast.error(err.response?.data?.message ?? 'เกิดข้อผิดพลาด กรุณาลองใหม่');
+    onError: (_err: AxiosError<{ message: string }>) => {
+      // caller handles toast via mutate() options
     },
   });
 }

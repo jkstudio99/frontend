@@ -1,7 +1,6 @@
 import { apiClient } from './client';
-import type { Category } from '@/domain/types/category.types';
+import type { Category } from '@/domain/types/medicine.types';
 
 export const categoriesApi = {
-  list: () =>
-    apiClient.get<{ data: Category[] }>('/categories').then((r) => r.data.data),
+  list: () => apiClient.get<{ data: Category[] }>('/categories').then((r) => r.data.data),
 };

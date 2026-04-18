@@ -72,6 +72,9 @@
     },
     "pagination": {
       "showing": "Showing {from}–{to} of {total} items"
+    },
+    "common": {
+      "back": "Back"
     }
   },
   "common": {
